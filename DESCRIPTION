@@ -1,6 +1,6 @@
 Package: iNZightUpdate
 Title: An updater for the iNZight desktop apps
-Version: 0.0.2
+Version: 0.0.2.9000
 Authors@R: 
     person("Tom", "Elliott", role = c("aut", "cre"),
            email = "tom.elliott@auckland.ac.nz")
