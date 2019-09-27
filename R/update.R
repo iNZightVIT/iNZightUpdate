@@ -15,16 +15,28 @@ update <- function(os = c("windows", "macos", "linux")) {
 
 .update <- function(lib, type = "source") {
     cat(sprintf("* Updating packages in %s\n", lib))
-    x <- try(utils::update.packages(
-        lib.loc = lib, 
-        repos = c(
-            "https://r.docker.stat.auckland.ac.nz",
-            "https://cloud.r-project.org"
-        ),
-        type = type,
-        ask = FALSE
-    ), silent = TRUE)
+    repos <- "https://cloud.r-project.org"
+    x <- try(
+        utils::update.packages(
+            lib.loc = lib, 
+            repos = repos,
+            type = type,
+            ask = FALSE
+        ), 
+        silent = TRUE
+    )
     !inherits(x, "try-error")
+
+    # now update from github release
+    for (inz_pkg in inzight_packages()) {
+        if (update_available(inz_pkg)) {
+            deps <- get_dependencies(inz_pkg)
+            if (nrow(deps)) {
+                install_deps(deps, repos, lib)
+            }
+            install_inzight_pkg(pkg, lib)
+        }
+    }
 }
 
 update_windows <- function() {
@@ -39,4 +51,12 @@ update_macos <- function() {
 
 update_linux <- function() {
     .update(getwd())
+}
+
+install_inzight_pkg <- function(pkg, lib) {
+    if (pkg %notin% inzight_packages()) return()
+    utils::install.packages(pkg,
+        contriburl = gh_url(pkg),
+        lib.loc = lib
+    )
 }
