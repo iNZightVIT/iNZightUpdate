@@ -1,6 +1,6 @@
-# iNZightUpdate 0.0.2.9000
+# iNZightUpdate 0.0.3
 
-
+- checks if iNZight is being upgraded to 4.0, in which case point to website instead
 
 # iNZightUpdate 0.0.2
 
