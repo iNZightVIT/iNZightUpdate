@@ -7,8 +7,7 @@
 update <- function(os = c("windows", "macos", "linux")) {
     os <- match.arg(os)
 
-    if (package_version("iNZight") < numeric_version("4.0.0")) {
-        return()
+    if (utils::packageVersion("iNZight") < numeric_version("4.0.0")) {
         msg <- c(
             "The latest version, iNZight 4.0, contains some bigger changes",
             "than usual. It also has some updated dependencies, so please",
@@ -17,7 +16,7 @@ update <- function(os = c("windows", "macos", "linux")) {
             "  https://inzight.nz/getinzight"
         )
         if (requireNamespace("tcltk", quietly = TRUE)) {
-            tcltk::tk_messagebox("ok",
+            tcltk::tk_messageBox("ok",
                 message = paste(msg, collapse = "\n"),
                 caption = "New Major Release Available"
             )
