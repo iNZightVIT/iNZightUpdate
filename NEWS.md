@@ -1,3 +1,7 @@
+# iNZightUpdate 0.0.5
+
+- moves user preferences to new location (using `tools::R_user_dir()`)
+
 # iNZightUpdate 0.0.4
 
 - checks if iNZight is being upgraded to 4.0, in which case point to website instead

@@ -35,28 +35,42 @@ update <- function(os = c("windows", "macos", "linux")) {
 
 .update <- function(lib, type = "source") {
     cat(sprintf("* Updating packages in %s\n", lib))
-    x <- try(utils::update.packages(
-        lib.loc = lib,
-        repos = c(
-            "https://r.docker.stat.auckland.ac.nz",
-            "https://cloud.r-project.org"
+    x <- try(
+        utils::update.packages(
+            lib.loc = lib,
+            repos = c(
+                "https://r.docker.stat.auckland.ac.nz",
+                "https://cloud.r-project.org"
+            ),
+            type = type,
+            ask = FALSE
         ),
-        type = type,
-        ask = FALSE
-    ), silent = TRUE)
+        silent = TRUE
+    )
     !inherits(x, "try-error")
 }
 
 update_windows <- function() {
+    move_win_prefs()
     .update(.libPaths()[1], type = "win.binary")
 }
 
 update_macos <- function() {
     .update("/Applications/iNZightVIT/.library")
-        # and either type = "mac.binary.el-capitan")
-        # or type = "mac.binary") ???
 }
 
 update_linux <- function() {
     .update(getwd())
+}
+
+move_win_prefs <- function() {
+    if (utils::packageVersion("iNZight") >= numeric_version("4.1")) return()
+    pp <- file.path("~", "iNZightVIT", ".inzight")
+    if (dir.exists(pp)) pp <- file.path(pp, ".inzight")
+    if (!file.exists(pp)) return()
+    np <- file.path(
+        tools::R_user_dir("iNZight", "config"),
+        "preferences.R"
+    )
+    try(file.rename(pp, np), TRUE)
 }
