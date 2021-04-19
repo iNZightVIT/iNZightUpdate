@@ -1,12 +1,14 @@
 Package: iNZightUpdate
 Title: An updater for the iNZight desktop apps
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: c(
     person("Tom", "Elliott", role = c("aut", "cre"), email = "tom.elliott@auckland.ac.nz")
     )
 Description: The iNZightVIT desktop apps require updating,
     so this package allows us to control that process
     as a simple R project (which can itself be updated).
+Depends:
+    R (>= 4.0)
 Suggests: tcltk
 License: GPL-3
 Encoding: UTF-8
