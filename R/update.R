@@ -79,7 +79,7 @@ move_win_prefs <- function() {
 update_launcher <- function() {
     # update launcher.R
     new_launcher <- "launcher.R.tmp"
-    res <- download.file(
+    res <- utils::download.file(
         'https://raw.githubusercontent.com/iNZightVIT/win-installer/master/launcher.R',
         new_launcher,
         quiet = TRUE
