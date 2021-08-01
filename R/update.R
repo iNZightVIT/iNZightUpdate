@@ -52,6 +52,7 @@ update <- function(os = c("windows", "macos", "linux")) {
 
 update_windows <- function() {
     move_win_prefs()
+    update_launcher()
     .update(.libPaths()[1], type = "win.binary")
 }
 
@@ -73,4 +74,17 @@ move_win_prefs <- function() {
         "preferences.R"
     )
     try(file.rename(pp, np), TRUE)
+}
+
+update_launcher <- function() {
+    # update launcher.R
+    new_launcher <- "launcher.R.tmp"
+    res <- download.file(
+        'https://raw.githubusercontent.com/iNZightVIT/win-installer/master/launcher.R',
+        new_launcher,
+        quiet = TRUE
+    )
+    if (res == 0) {
+        file.rename(new_launcher, "launcher.R")
+    }
 }
