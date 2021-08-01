@@ -1,5 +1,6 @@
+# iNZightUpdate 0.0.6
 
-
+- add method to update `launcher.R`
 
 # iNZightUpdate 0.0.5
 
