@@ -52,7 +52,15 @@ update <- function(os = c("windows", "macos", "linux")) {
 
 update_windows <- function() {
     move_win_prefs()
-    update_launcher()
+    update <- try(update_launcher(), silent = TRUE)
+    if (inherits(update, "try-error")) {
+        stop(
+            paste(sep = "\n",
+                "iNZight was unable to self-update.",
+                "Please check your internet connection, or install a fresh copy from the website (https://inzight.nz)."
+            )
+        )
+    }
     .update(.libPaths()[1], type = "win.binary")
 }
 

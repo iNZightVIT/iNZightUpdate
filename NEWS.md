@@ -1,3 +1,7 @@
+# iNZightUpdate 0.0.8
+
+- add error handling for updating the Windows launcher/updater
+
 # iNZightUpdate 0.0.6
 
 - add method to update `launcher.R`
